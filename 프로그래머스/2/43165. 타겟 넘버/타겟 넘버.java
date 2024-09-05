@@ -2,23 +2,23 @@ class Solution {
     static int answer = 0;
     
     public int solution(int[] numbers, int target) {
-        dfs(numbers, 0, target, 0);
+        targetNumber(numbers, 0, 0, target);
         return answer;
     }
     
-    static void dfs(int[] nums, int idx, int target, int num) {
-        if(idx == nums.length) {
-            if(num == target) {
+    static void targetNumber(int[] numbers, int index, int sum, int target) {
+
+        // 모든 숫자를 다 사용한 경우
+        if (index == numbers.length) {
+            // 타겟넘버 == sum 인 경우
+            if(target == sum) {
                 answer++;
             }
             
             return;
         }
         
-        int plus = num + nums[idx];
-        int minus = num - nums[idx];
-        
-        dfs(nums, idx + 1, target, plus);
-        dfs(nums, idx + 1, target, minus);
+        targetNumber(numbers, index + 1, sum + numbers[index], target);
+        targetNumber(numbers, index + 1, sum - numbers[index], target);
     }
 }
